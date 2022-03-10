@@ -24,7 +24,10 @@ class ProductResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')->required(),
-                Forms\Components\TextInput::make('description')->nullable(),
+
+                Forms\Components\MarkdownEditor::make('description')
+                    ->label('Description')
+                    ->nullable(),
             ]);
     }
 
@@ -35,9 +38,9 @@ class ProductResource extends Resource
                 Tables\Columns\TextColumn::make('name')->sortable(),
                 Tables\Columns\TextColumn::make('description'),
             ]);
-            // ->filters([
-            //     //
-            // ]);
+        // ->filters([
+        //     //
+        // ]);
     }
 
     public static function getRelations(): array
