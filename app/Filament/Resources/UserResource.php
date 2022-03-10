@@ -21,7 +21,9 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\TextInput::make('name'),
+                Forms\Components\TextInput::make('email'),
+                Forms\Components\TextInput::make('password')->password(true),
             ]);
     }
 
@@ -29,11 +31,12 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                //
-            ])
-            ->filters([
-                //
+                Tables\Columns\TextColumn::make('name')->sortable(),
+                Tables\Columns\TextColumn::make('email'),
             ]);
+            // ->filters([
+            //     //
+            // ]);
     }
 
     public static function getRelations(): array
