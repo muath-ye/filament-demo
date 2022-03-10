@@ -13,6 +13,8 @@ use Filament\Tables;
 
 class ProductResource extends Resource
 {
+    protected static ?string $recordTitleAttribute = 'name';
+
     protected static ?string $model = Product::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
@@ -21,7 +23,8 @@ class ProductResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\TextInput::make('name')->required(),
+                Forms\Components\TextInput::make('description')->nullable(),
             ]);
     }
 
@@ -29,11 +32,12 @@ class ProductResource extends Resource
     {
         return $table
             ->columns([
-                //
-            ])
-            ->filters([
-                //
+                Tables\Columns\TextColumn::make('name')->sortable(),
+                Tables\Columns\TextColumn::make('description'),
             ]);
+            // ->filters([
+            //     //
+            // ]);
     }
 
     public static function getRelations(): array
